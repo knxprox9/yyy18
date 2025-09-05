@@ -60,6 +60,7 @@
   "scripts": {
     "start": "craco start",
     "build": "craco build",
+    "build:embeddable": "node ../build-embeddable.js",
     "test": "craco test"
   },
   "browserslist": {
