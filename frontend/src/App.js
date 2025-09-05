@@ -1,6 +1,6 @@
 import React from "react";
 import "./App.css";
-import EmbeddableProductCard from "./components/EmbeddableProductCard/EmbeddableProductCard";
+import ProductCard from "./components/ProductCard";
 
 /**
  * Product Card - Main Application
@@ -8,15 +8,8 @@ import EmbeddableProductCard from "./components/EmbeddableProductCard/Embeddable
  * This app has been optimized to serve as an embeddable product card component
  * that can be integrated into external websites seamlessly.
  * 
- * Features:
- * - Arabic RTL support with premium typography
- * - 12+ payment card types with authentic branding
- * - Fully responsive design (mobile/tablet/desktop)
- * - Self-contained component (no external dependencies)
- * - Professional animations and interactions
- * - Payment method callback integration
- * - Theme customization (light/dark)
- * - Accessibility compliance (ARIA labels, keyboard navigation)
+ * The app now shows the original ProductCard component with its beautiful
+ * gray header design preserved exactly as it was.
  */
 
 function App() {
@@ -24,57 +17,16 @@ function App() {
   const handlePaymentMethodClick = (method) => {
     console.log('🎯 Payment method selected:', method);
     
-    // This is where you would integrate with your payment processing system
-    // Example integrations:
-    switch (method.id) {
-      case 'visa':
-        console.log('Processing Visa card payment...');
-        break;
-      case 'mastercard':
-        console.log('Processing Mastercard payment...');
-        break;
-      case 'googleplay':
-        console.log('Processing Google Play card...');
-        break;
-      default:
-        console.log(`Processing ${method.name} payment...`);
-    }
-    
-    // Show selection to user (you can replace this with your own UI)
+    // Show selection to user
     alert(`تم اختيار: ${method.name}\nSelected: ${method.name}`);
   };
 
   return (
     <div className="App">
       <div className="app-container">
-        {/* Main Product Card - Centered and Optimized for Embedding */}
+        {/* Main Product Card - Using original ProductCard with gray header design */}
         <div className="card-container">
-          <EmbeddableProductCard 
-            // Size and appearance
-            width="280px"
-            theme="light"
-            backgroundColor="white"
-            borderRadius="1rem"
-            shadow="default"
-            
-            // Content (Arabic by default, as per original design)
-            cardTitle="بطائق إلكترونية مسبقة الدفع"
-            cardSubtitle="بطاقة دفع رقمية جاهزة للاستخدام الفوري"
-            rating="(29,062)"
-            language="ar"
-            
-            // Features enabled (all features as per original design)
-            showVideo={true}
-            showPromoItems={true}
-            showFavoriteButton={true}
-            showToggleButton={true}
-            
-            // Payment integration
-            onPaymentMethodClick={handlePaymentMethodClick}
-            
-            // Additional styling for embedding optimization
-            className="main-product-card"
-          />
+          <ProductCard />
         </div>
         
         {/* Integration Notice */}
@@ -107,7 +59,7 @@ function App() {
               marginBottom: '16px',
               opacity: '0.95'
             }}>
-              هذا الكرت محسن للتضمين في المواقع الخارجية مع دعم كامل للعربية و 12+ نوع بطاقة دفع
+              هذا الكرت محسن للتضمين في المواقع الخارجية مع المحافظة على التصميم الرمادي الأصلي في الرأس
             </p>
             <div style={{
               background: 'rgba(0,0,0,0.2)',
@@ -119,11 +71,12 @@ function App() {
               textAlign: 'left',
               direction: 'ltr'
             }}>
-              {`<EmbeddableProductCard 
+              {`<ProductCard />
+// أو للتخصيص المتقدم:
+<EmbeddableProductCard 
   width="280px" 
   theme="light" 
   language="ar"
-  onPaymentMethodClick={handlePayment}
 />`}
             </div>
           </div>
@@ -138,12 +91,15 @@ function App() {
         }}>
           <p>
             📁 Embeddable files ready in <code>/dist/</code> folder<br/>
-            📖 Integration guide: <code>DEPLOYMENT_GUIDE.md</code>
+            📖 Integration guide: <code>DEPLOYMENT_GUIDE.md</code><br/>
+            ✅ التصميم الرمادي الأصلي في الرأس محفوظ تماماً
           </p>
         </div>
       </div>
     </div>
   );
 }
+
+export default App;
 
 export default App;
