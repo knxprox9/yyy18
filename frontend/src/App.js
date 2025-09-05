@@ -1,160 +1,151 @@
 import React from "react";
 import "./App.css";
-import ProductCard from "./components/ProductCard";
-import CardShowcase from "./components/CardShowcase";
-import StandaloneDemo from "./components/StandaloneDemo";
 import EmbeddableProductCard from "./components/EmbeddableProductCard/EmbeddableProductCard";
-import ProductCardDemo from "./components/EmbeddableProductCard/ProductCardDemo";
-import ProductCardShowcase from "./components/EmbeddableProductCard/ProductCardShowcase";
+
+/**
+ * Product Card - Main Application
+ * 
+ * This app has been optimized to serve as an embeddable product card component
+ * that can be integrated into external websites seamlessly.
+ * 
+ * Features:
+ * - Arabic RTL support with premium typography
+ * - 12+ payment card types with authentic branding
+ * - Fully responsive design (mobile/tablet/desktop)
+ * - Self-contained component (no external dependencies)
+ * - Professional animations and interactions
+ * - Payment method callback integration
+ * - Theme customization (light/dark)
+ * - Accessibility compliance (ARIA labels, keyboard navigation)
+ */
 
 function App() {
-  // Show different views based on URL parameters
-  const urlParams = new URLSearchParams(window.location.search);
-  const view = urlParams.get('view');
-  
-  // New embeddable component views
-  if (view === 'embeddable') {
-    return <ProductCardDemo />;
-  }
-  
-  if (view === 'embeddable-showcase') {
-    return <ProductCardShowcase />;
-  }
-  
-  if (view === 'embeddable-simple') {
-    return (
-      <div style={{ 
-        minHeight: '100vh', 
-        background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        padding: '20px'
-      }}>
-        <EmbeddableProductCard 
-          onPaymentMethodClick={(method) => {
-            console.log('Payment method selected:', method);
-            alert(`Selected: ${method.name}`);
-          }}
-        />
-      </div>
-    );
-  }
-  
-  // Original views
-  if (view === 'showcase') {
-    return <CardShowcase />;
-  }
-  
-  if (view === 'standalone') {
-    return <StandaloneDemo />;
-  }
+  // Payment method selection handler
+  const handlePaymentMethodClick = (method) => {
+    console.log('🎯 Payment method selected:', method);
+    
+    // This is where you would integrate with your payment processing system
+    // Example integrations:
+    switch (method.id) {
+      case 'visa':
+        console.log('Processing Visa card payment...');
+        break;
+      case 'mastercard':
+        console.log('Processing Mastercard payment...');
+        break;
+      case 'googleplay':
+        console.log('Processing Google Play card...');
+        break;
+      default:
+        console.log(`Processing ${method.name} payment...`);
+    }
+    
+    // Show selection to user (you can replace this with your own UI)
+    alert(`تم اختيار: ${method.name}\nSelected: ${method.name}`);
+  };
 
   return (
     <div className="App">
       <div className="app-container">
-        <h1 className="app-title">متجر المنتجات</h1>
+        {/* Main Product Card - Centered and Optimized for Embedding */}
         <div className="card-container">
-          <ProductCard />
+          <EmbeddableProductCard 
+            // Size and appearance
+            width="280px"
+            theme="light"
+            backgroundColor="white"
+            borderRadius="1rem"
+            shadow="default"
+            
+            // Content (Arabic by default, as per original design)
+            cardTitle="بطائق إلكترونية مسبقة الدفع"
+            cardSubtitle="بطاقة دفع رقمية جاهزة للاستخدام الفوري"
+            rating="(29,062)"
+            language="ar"
+            
+            // Features enabled (all features as per original design)
+            showVideo={true}
+            showPromoItems={true}
+            showFavoriteButton={true}
+            showToggleButton={true}
+            
+            // Payment integration
+            onPaymentMethodClick={handlePaymentMethodClick}
+            
+            // Additional styling for embedding optimization
+            className="main-product-card"
+          />
         </div>
         
+        {/* Integration Notice */}
         <div style={{ 
           marginTop: '40px', 
           textAlign: 'center', 
-          color: '#666',
-          direction: 'ltr'
+          color: 'rgba(255,255,255,0.9)',
+          direction: 'rtl',
+          maxWidth: '600px',
+          margin: '40px auto 0'
         }}>
-          <h2 style={{ marginBottom: '20px' }}>🎨 Available Views</h2>
           <div style={{ 
-            display: 'flex', 
-            flexWrap: 'wrap', 
-            gap: '10px', 
-            justifyContent: 'center',
-            maxWidth: '800px',
-            margin: '0 auto'
-          }}>
-            <a href="?" style={{ 
-              padding: '8px 16px', 
-              background: '#667eea', 
-              color: 'white', 
-              textDecoration: 'none', 
-              borderRadius: '20px',
-              fontSize: '14px'
-            }}>
-              Main App
-            </a>
-            <a href="?view=showcase" style={{ 
-              padding: '8px 16px', 
-              background: '#667eea', 
-              color: 'white', 
-              textDecoration: 'none', 
-              borderRadius: '20px',
-              fontSize: '14px'
-            }}>
-              Card Showcase
-            </a>
-            <a href="?view=standalone" style={{ 
-              padding: '8px 16px', 
-              background: '#667eea', 
-              color: 'white', 
-              textDecoration: 'none', 
-              borderRadius: '20px',
-              fontSize: '14px'
-            }}>
-              Standalone Demo
-            </a>
-            <a href="?view=embeddable" style={{ 
-              padding: '8px 16px', 
-              background: '#e74c3c', 
-              color: 'white', 
-              textDecoration: 'none', 
-              borderRadius: '20px',
-              fontSize: '14px',
-              fontWeight: 'bold'
-            }}>
-              🎯 Embeddable Demo
-            </a>
-            <a href="?view=embeddable-showcase" style={{ 
-              padding: '8px 16px', 
-              background: '#e74c3c', 
-              color: 'white', 
-              textDecoration: 'none', 
-              borderRadius: '20px',
-              fontSize: '14px'
-            }}>
-              🎯 Card Designs
-            </a>
-            <a href="?view=embeddable-simple" style={{ 
-              padding: '8px 16px', 
-              background: '#27ae60', 
-              color: 'white', 
-              textDecoration: 'none', 
-              borderRadius: '20px',
-              fontSize: '14px'
-            }}>
-              ✨ Simple Card
-            </a>
-          </div>
-          
-          <div style={{ 
-            marginTop: '30px', 
-            padding: '20px', 
+            padding: '24px', 
             background: 'rgba(255,255,255,0.1)', 
-            borderRadius: '15px',
-            maxWidth: '600px',
-            margin: '30px auto 0'
+            borderRadius: '16px',
+            backdropFilter: 'blur(10px)',
+            border: '1px solid rgba(255,255,255,0.2)'
           }}>
-            <h3 style={{ color: '#e74c3c', marginBottom: '15px' }}>🚀 New: Embeddable Product Card</h3>
-            <p style={{ fontSize: '14px', lineHeight: '1.6' }}>
-              The new embeddable component is a standalone, fully responsive card that can be integrated 
-              into any website. It features extensive customization options, theme support, and 
-              maintains all the beautiful design elements while being completely self-contained.
+            <h3 style={{ 
+              color: '#ffd426', 
+              marginBottom: '16px',
+              fontSize: '1.2rem',
+              fontWeight: '800'
+            }}>
+              🎯 مكون قابل للتضمين
+            </h3>
+            <p style={{ 
+              fontSize: '14px', 
+              lineHeight: '1.6',
+              marginBottom: '16px',
+              opacity: '0.95'
+            }}>
+              هذا الكرت محسن للتضمين في المواقع الخارجية مع دعم كامل للعربية و 12+ نوع بطاقة دفع
             </p>
+            <div style={{
+              background: 'rgba(0,0,0,0.2)',
+              padding: '12px',
+              borderRadius: '8px',
+              fontFamily: 'monospace',
+              fontSize: '12px',
+              color: '#e2e8f0',
+              textAlign: 'left',
+              direction: 'ltr'
+            }}>
+              {`<EmbeddableProductCard 
+  width="280px" 
+  theme="light" 
+  language="ar"
+  onPaymentMethodClick={handlePayment}
+/>`}
+            </div>
           </div>
+        </div>
+        
+        {/* Technical Info */}
+        <div style={{ 
+          marginTop: '24px', 
+          textAlign: 'center', 
+          color: 'rgba(255,255,255,0.7)',
+          fontSize: '12px'
+        }}>
+          <p>
+            📁 Embeddable files ready in <code>/dist/</code> folder<br/>
+            📖 Integration guide: <code>DEPLOYMENT_GUIDE.md</code>
+          </p>
         </div>
       </div>
     </div>
   );
 }
+
+export default App;
 
 export default App;
